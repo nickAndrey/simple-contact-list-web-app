@@ -16,9 +16,7 @@ const TitleStyled = styled.p`
   text-align: center;
 `;
 
-type HeaderProps = {};
-
-const Header: FC<HeaderProps> = ({}) => {
+const Header: FC = () => {
   return (
     <HeaderStyled>
       <TitleStyled>Agent Referral Form Agents Only</TitleStyled>

@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import styled from 'styled-components';
 
 import Header from './components/Header';
@@ -26,7 +27,7 @@ const SubtitleStyled = styled.p`
   text-align: center;
 `;
 
-function App() {
+const App: FC = () => {
   return (
     <>
       <Layout>
@@ -39,6 +40,6 @@ function App() {
       </Layout>
     </>
   );
-}
+};
 
 export default App;

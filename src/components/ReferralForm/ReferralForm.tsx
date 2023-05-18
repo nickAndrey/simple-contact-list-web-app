@@ -55,9 +55,7 @@ const defaultReferral: Referral = {
   notes: '',
 };
 
-type ReferralFormProps = {};
-
-const ReferralForm: FC<ReferralFormProps> = () => {
+const ReferralForm: FC = () => {
   const [referrals, setReferrals] = useState<Referral[]>([defaultReferral]);
   const [currentReferralId, setCurrentReferralId] = useState(defaultReferral.id);
 
