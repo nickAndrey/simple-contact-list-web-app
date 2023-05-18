@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import styled from 'styled-components';
+
+import Header from './components/Header';
+import ReferralForm from './components/ReferralForm/ReferralForm';
+import Layout from './layouts/Layout';
+
+const MainStyled = styled.div`
+  max-width: ${({ theme: { containerWidth } }) => containerWidth};
+  width: 100%;
+  margin: 0 auto;
+  flex-grow: 1;
+  padding-top: 34px;
+`;
+
+const TitleStyled = styled.p`
+  ${({ theme: { font } }) => font['24-32-500']};
+  color: ${({ theme: { color } }) => color.blue6};
+  margin-bottom: 8px;
+  text-align: center;
+`;
+
+const SubtitleStyled = styled.p`
+  ${({ theme: { font } }) => font['20-32-500']};
+  color: ${({ theme: { color } }) => color.blue6};
+  margin-bottom: 28px;
+  text-align: center;
+`;
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Layout>
+        <Header />
+        <MainStyled>
+          <TitleStyled>Agent Referral List</TitleStyled>
+          <SubtitleStyled>You can add up to five referrals at a time</SubtitleStyled>
+          <ReferralForm />
+        </MainStyled>
+      </Layout>
+    </>
   );
 }
 
