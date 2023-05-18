@@ -6,7 +6,7 @@ import ReferralForm from './components/ReferralForm/ReferralForm';
 import Layout from './layouts/Layout';
 
 const MainStyled = styled.div`
-  max-width: ${({ theme: { containerWidth } }) => containerWidth};
+  max-width: ${({ theme: { mainContainerWidth } }) => mainContainerWidth};
   width: 100%;
   margin: 0 auto;
   flex-grow: 1;

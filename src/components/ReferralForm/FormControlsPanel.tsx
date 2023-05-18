@@ -5,10 +5,10 @@ import EmailIcon from '@mui/icons-material/Email';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
 import TranslateIcon from '@mui/icons-material/Translate';
+import { IconButton } from '@mui/material';
 import Accordion from '@mui/material/Accordion/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary/AccordionSummary';
-import IconButton from '@mui/material/IconButton';
 import { ChangeEvent, FC } from 'react';
 import styled from 'styled-components';
 
@@ -30,17 +30,18 @@ const SummaryContentStyled = styled.div`
   gap: 16px;
 `;
 
-const ButtonContainerStyled = styled.div`
-  position: absolute;
-  right: 40px;
-
-  button {
-    color: ${({ theme: { color } }) => color.blue1};
+const AccordionDetailsStyled = styled(AccordionDetails)`
+  &.details-container {
+    padding: 32px 56px 24px 56px;
   }
 `;
 
-const DetailsContainerStyled = styled.div`
-  padding: 32px 56px 24px 56px;
+const DeleteReferralButtonStyled = styled(IconButton)`
+  &.delete-referral-button {
+    position: absolute;
+    right: 40px;
+    color: ${({ theme: { color } }) => color.blue1};
+  }
 `;
 
 const RowStyled = styled.div`
@@ -142,7 +143,7 @@ const FormControlsPanel: FC<FormControlsPanelProps> = ({
   const titleContent = firstName || lastName ? `${firstName} ${lastName}` : 'New Referral';
 
   return (
-    <AccordionStyled onFocus={onSetCurrentId} defaultExpanded={defaultExpanded}>
+    <AccordionStyled onFocus={onSetCurrentId} defaultExpanded={defaultExpanded} disableGutters>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <SummaryContentStyled>
           <ReferralNumberStyled referralNumber={referralNumber}>
@@ -152,94 +153,94 @@ const FormControlsPanel: FC<FormControlsPanelProps> = ({
           <TitleStyled isNewReferral={!firstName && !lastName}>{titleContent}</TitleStyled>
 
           {hasActions && (
-            <ButtonContainerStyled>
-              <IconButton onClick={onDeleteItem}>
-                <DeleteIcon />
-              </IconButton>
-            </ButtonContainerStyled>
+            <DeleteReferralButtonStyled
+              classes={{ root: 'delete-referral-button' }}
+              onClick={onDeleteItem}
+            >
+              <DeleteIcon />
+            </DeleteReferralButtonStyled>
           )}
         </SummaryContentStyled>
       </AccordionSummary>
-      <AccordionDetails>
-        <DetailsContainerStyled>
-          <RowStyled>
-            <MaterialInput
-              onChange={onFirstNameChange}
-              value={firstName}
-              name="firstName"
-              placeholder="First Name"
-              icon={<AccountCircle />}
-              required
-            />
-            <MaterialInput
-              onChange={onLastNameChange}
-              value={lastName}
-              name="lastName"
-              placeholder="Last Name"
-              icon={<AccountCircle />}
-              required
-            />
-          </RowStyled>
 
-          <RowStyled>
-            <MaterialInput
-              onChange={onDateOfBirthChange}
-              value={dateOfBirth}
-              name="dateOfBirth"
-              placeholder="Date of Birth"
-              icon={<CakeIcon />}
-              required
-            />
-            <MaterialInput
-              onChange={onContactLanguageChange}
-              value={contactLanguage}
-              name="contactLanguage"
-              placeholder="Contact Language"
-              icon={<TranslateIcon />}
-              required
-            />
-          </RowStyled>
+      <AccordionDetailsStyled classes={{ root: 'details-container' }}>
+        <RowStyled>
+          <MaterialInput
+            onChange={onFirstNameChange}
+            value={firstName}
+            name="firstName"
+            placeholder="First Name"
+            icon={<AccountCircle />}
+            required
+          />
+          <MaterialInput
+            onChange={onLastNameChange}
+            value={lastName}
+            name="lastName"
+            placeholder="Last Name"
+            icon={<AccountCircle />}
+            required
+          />
+        </RowStyled>
 
-          <RowStyled>
-            <MaterialInput
-              onChange={onPhoneNumberChange}
-              value={phoneNumber}
-              name="phoneNumber"
-              placeholder="Phone"
-              icon={<LocalPhoneIcon />}
-              required
-            />
-            <MaterialInput
-              onChange={onEmailChange}
-              value={email}
-              name="email"
-              type="email"
-              placeholder="Email"
-              icon={<EmailIcon />}
-              required
-            />
-          </RowStyled>
+        <RowStyled>
+          <MaterialInput
+            onChange={onDateOfBirthChange}
+            value={dateOfBirth}
+            name="dateOfBirth"
+            placeholder="Date of Birth"
+            icon={<CakeIcon />}
+            required
+          />
+          <MaterialInput
+            onChange={onContactLanguageChange}
+            value={contactLanguage}
+            name="contactLanguage"
+            placeholder="Contact Language"
+            icon={<TranslateIcon />}
+            required
+          />
+        </RowStyled>
 
-          <RowStyled>
-            <MaterialAutocomplete
-              onAddressChange={onAddressChange}
-              value={address}
-              name="address"
-              placeholder="Address"
-              required
-            />
-          </RowStyled>
+        <RowStyled>
+          <MaterialInput
+            onChange={onPhoneNumberChange}
+            value={phoneNumber}
+            name="phoneNumber"
+            placeholder="Phone"
+            icon={<LocalPhoneIcon />}
+            required
+          />
+          <MaterialInput
+            onChange={onEmailChange}
+            value={email}
+            name="email"
+            type="email"
+            placeholder="Email"
+            icon={<EmailIcon />}
+            required
+          />
+        </RowStyled>
 
-          <RowStyled>
-            <MaterialInput
-              onChange={onNotesChange}
-              value={notes}
-              name="notes"
-              placeholder="Notes/Reason"
-            />
-          </RowStyled>
-        </DetailsContainerStyled>
-      </AccordionDetails>
+        <RowStyled>
+          <MaterialAutocomplete
+            onAddressChange={onAddressChange}
+            value={address}
+            name="address"
+            placeholder="Address"
+            required
+          />
+        </RowStyled>
+
+        <RowStyled>
+          <MaterialInput
+            onChange={onNotesChange}
+            value={notes}
+            name="notes"
+            placeholder="Notes/Reason"
+          />
+        </RowStyled>
+      </AccordionDetailsStyled>
     </AccordionStyled>
   );
 };

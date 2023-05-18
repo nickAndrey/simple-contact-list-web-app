@@ -7,28 +7,44 @@ import FormControlsPanel from './FormControlsPanel';
 const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  gap: 16px;
+  justify-content: center;
 `;
 
-const ButtonStyled = styled(Button)`
-  width: max-content;
-  text-transform: uppercase;
-  ${({ theme: { font } }) => font['14-24-500']};
-  color: ${({ theme: { color } }) => color.blue6};
-`;
-
-const SubmitButtonStyled = styled.button`
+const FormControlsContainerStyled = styled.fieldset`
   width: 100%;
-  padding: 12px 0;
-  ${({ theme: { font } }) => font['14-24-500']};
-  color: ${({ theme: { color } }) => color.white};
-  background-color: ${({ theme: { color } }) => color.blue1};
-  text-transform: uppercase;
-  border-radius: 35px;
-  border: 0;
-  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+`;
+
+const AddReferralButtonStyled = styled(Button)`
+  &.add-referral-button {
+    width: max-content;
+    text-transform: uppercase;
+    ${({ theme: { font } }) => font['14-24-500']};
+    color: ${({ theme: { color } }) => color.blue6};
+    margin-bottom: 40px;
+  }
+`;
+
+const SubmitButtonStyled = styled(Button)`
+  &.submit-form-button {
+    width: 100%;
+    padding: 12px 0;
+    ${({ theme: { font } }) => font['14-24-500']};
+    color: ${({ theme: { color } }) => color.white};
+    background-color: ${({ theme: { color } }) => color.blue1};
+    text-transform: uppercase;
+    border-radius: 35px;
+    border: 0;
+    cursor: pointer;
+
+    :hover {
+      background-color: ${({ theme: { color } }) => color.blue1};
+    }
+  }
 `;
 
 type Referral = {
@@ -99,38 +115,46 @@ const ReferralForm: FC = () => {
 
   return (
     <FormStyled onSubmit={onSubmit} noValidate>
-      {referrals.map((referral, index) => (
-        <FormControlsPanel
-          key={referral.id}
-          referralNumber={index + 1}
-          firstName={referral.firstName}
-          onFirstNameChange={onReferralChange}
-          lastName={referral.lastName}
-          onLastNameChange={onReferralChange}
-          dateOfBirth={referral.dateOfBirth}
-          onDateOfBirthChange={onReferralChange}
-          contactLanguage={referral.contactLanguage}
-          onContactLanguageChange={onReferralChange}
-          phoneNumber={referral.phoneNumber}
-          onPhoneNumberChange={onReferralChange}
-          email={referral.email}
-          onEmailChange={onReferralChange}
-          address={referral.address}
-          notes={referral.notes}
-          onNotesChange={onReferralChange}
-          onAddressChange={(newAddress) => onSetNewAddress(newAddress, referral.id)}
-          onSetCurrentId={() => setCurrentReferralId(referral.id)}
-          onDeleteItem={() => onDeleteReferral(referral.id)}
-          hasActions={referrals.length > 1}
-          defaultExpanded={referrals.length === 1}
-        />
-      ))}
+      <FormControlsContainerStyled>
+        {referrals.map((referral, index) => (
+          <FormControlsPanel
+            key={referral.id}
+            referralNumber={index + 1}
+            firstName={referral.firstName}
+            onFirstNameChange={onReferralChange}
+            lastName={referral.lastName}
+            onLastNameChange={onReferralChange}
+            dateOfBirth={referral.dateOfBirth}
+            onDateOfBirthChange={onReferralChange}
+            contactLanguage={referral.contactLanguage}
+            onContactLanguageChange={onReferralChange}
+            phoneNumber={referral.phoneNumber}
+            onPhoneNumberChange={onReferralChange}
+            email={referral.email}
+            onEmailChange={onReferralChange}
+            address={referral.address}
+            notes={referral.notes}
+            onNotesChange={onReferralChange}
+            onAddressChange={(newAddress) => onSetNewAddress(newAddress, referral.id)}
+            onSetCurrentId={() => setCurrentReferralId(referral.id)}
+            onDeleteItem={() => onDeleteReferral(referral.id)}
+            hasActions={referrals.length > 1}
+            defaultExpanded={referrals.length === 1}
+          />
+        ))}
+      </FormControlsContainerStyled>
 
-      <ButtonStyled onClick={addNewReferral} disabled={referrals.length === 5}>
+      <AddReferralButtonStyled
+        classes={{ root: 'add-referral-button' }}
+        onClick={addNewReferral}
+        disabled={referrals.length === 5}
+      >
         + add another referral
-      </ButtonStyled>
+      </AddReferralButtonStyled>
 
-      <SubmitButtonStyled>SEND REFERRALS</SubmitButtonStyled>
+      <SubmitButtonStyled classes={{ root: 'submit-form-button' }}>
+        send referrals
+      </SubmitButtonStyled>
     </FormStyled>
   );
 };
