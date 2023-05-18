@@ -152,7 +152,7 @@ const ReferralForm: FC = () => {
         + add another referral
       </AddReferralButtonStyled>
 
-      <SubmitButtonStyled classes={{ root: 'submit-form-button' }}>
+      <SubmitButtonStyled type="submit" classes={{ root: 'submit-form-button' }}>
         send referrals
       </SubmitButtonStyled>
     </FormStyled>
