@@ -12,7 +12,7 @@ const TextFieldStyled = styled(TextField)`
     color: ${({ theme: { color } }) => color.blue6};
 
     ::placeholder {
-      opacity: 0.5;
+      opacity: 0.8;
       color: ${({ theme: { color } }) => color.blue3};
     }
   }
